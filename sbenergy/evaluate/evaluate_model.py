@@ -83,7 +83,7 @@ parser.add_argument(
     "--model_name",
     type=str,
     help="Name of the Model",
-    default="sbenergy_model.pkl",
+    default="sbenergy_forecast_model.pkl",
 )
 
 parser.add_argument(
