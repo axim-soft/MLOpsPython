@@ -55,7 +55,7 @@ def main():
         "--model_name",
         type=str,
         help="Name of the Model",
-        default="junoa_model.pkl",
+        default="sbenergy_forecast_model.pkl",
     )
 
     parser.add_argument(
@@ -111,19 +111,19 @@ def main():
     print("Getting training parameters")
 
     # Load the training parameters from the parameters file
-    with open("parameters.json") as f:
-        pars = json.load(f)
-    try:
-        train_args = pars["training"]
-    except KeyError:
-        print("Could not load training values from file")
-        train_args = {}
+#     with open("parameters.json") as f:
+#         pars = json.load(f)
+#     try:
+#         train_args = pars["training"]
+#     except KeyError:
+#         print("Could not load training values from file")
+#         train_args = {}
 
     # Log the training parameters
-    print(f"Parameters: {train_args}")
-    for (k, v) in train_args.items():
-        run.log(k, v)
-        run.parent.log(k, v)
+#     print(f"Parameters: {train_args}")
+#     for (k, v) in train_args.items():
+#         run.log(k, v)
+#         run.parent.log(k, v)
 
     # Get the dataset
     if (dataset_name):
