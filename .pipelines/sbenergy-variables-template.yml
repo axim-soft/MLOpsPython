@@ -22,7 +22,7 @@ variables:
   - name: EXPERIMENT_NAME
     value: mlopspython
   - name: DATASET_NAME
-    value: juno_3month_one_hour
+    value: diabetes
   # Uncomment DATASTORE_NAME if you have configured non default datastore to point to your data
   - name: DATASTORE_NAME
     value: workspaceblobstore
@@ -113,16 +113,16 @@ variables:
     value: "input"
   # Blobname for the input data - include any applicable path in the string 
   - name: SCORING_DATASTORE_INPUT_FILENAME
-    value: "sbenergy_scoring_input.csv"
+    value: "diabetes_scoring_input.csv"
   # Blob container where the output data for scoring can be found
   - name: SCORING_DATASTORE_OUTPUT_CONTAINER
     value: "output"
   # Blobname for the output data - include any applicable path in the string 
   - name: SCORING_DATASTORE_OUTPUT_FILENAME
-    value: "sbenergy_scoring_output.csv"
+    value: "diabetes_scoring_output.csv"
   # Dataset name for input data for scoring
   - name: SCORING_DATASET_NAME
-    value: "sbenergy_scoring_ds"
+    value: "diabetes_scoring_ds"
   # Scoring pipeline name
   - name: SCORING_PIPELINE_NAME
     value: "sbenergy-scoring-pipeline"
