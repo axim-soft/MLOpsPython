@@ -29,7 +29,7 @@ import os
 import argparse
 import joblib
 import json
-from train import split_data, train_model, get_model_metrics
+from train import split_data, train_model, get_model_metrics, model_initialize
 
 
 def register_dataset(
@@ -55,7 +55,7 @@ def main():
         "--model_name",
         type=str,
         help="Name of the Model",
-        default="diabetes_model.pkl",
+        default="sbenergy_forecast_model.pkl",
     )
 
     parser.add_argument(
@@ -111,19 +111,19 @@ def main():
     print("Getting training parameters")
 
     # Load the training parameters from the parameters file
-    with open("parameters.json") as f:
-        pars = json.load(f)
-    try:
-        train_args = pars["training"]
-    except KeyError:
-        print("Could not load training values from file")
-        train_args = {}
+#     with open("parameters.json") as f:
+#         pars = json.load(f)
+#     try:
+#         train_args = pars["training"]
+#     except KeyError:
+#         print("Could not load training values from file")
+#         train_args = {}
 
     # Log the training parameters
-    print(f"Parameters: {train_args}")
-    for (k, v) in train_args.items():
-        run.log(k, v)
-        run.parent.log(k, v)
+#     print(f"Parameters: {train_args}")
+#     for (k, v) in train_args.items():
+#         run.log(k, v)
+#         run.parent.log(k, v)
 
     # Get the dataset
     if (dataset_name):
@@ -144,14 +144,20 @@ def main():
     run.parent.tag("dataset_id", value=dataset.id)
 
     # Split the data into test/train
-    df = dataset.to_pandas_dataframe()
-    data = split_data(df)
-
+    train_df = dataset.to_pandas_dataframe()
+    train_df.index = pd.to_datetime(train_df.index)
+    val = train_df.tail(25)
+    df = train_df.drop(train_df['Direct Normal Irradiance (DNI) W/m2'][-25:].index)
+    horizon = 1
+    hist_window = 10
+    epochs = 10
+    data = split_data(df, horizon ,hist_window)
+    initialize_model = model_initialize(data, horizon)
     # Train the model
-    model = train_model(data, train_args)
+    model = train_model(initialize_model, data, epochs)
 
     # Evaluate and log the metrics returned from the train function
-    metrics = get_model_metrics(model, data)
+    metrics = get_model_metrics(model, train_df, val)
     for (k, v) in metrics.items():
         run.log(k, v)
         run.parent.log(k, v)
