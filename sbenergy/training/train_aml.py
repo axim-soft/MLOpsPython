@@ -30,6 +30,7 @@ import argparse
 import joblib
 import json
 from train import split_data, train_model, get_model_metrics, model_initialize
+import pandas as pd
 
 
 def register_dataset(
