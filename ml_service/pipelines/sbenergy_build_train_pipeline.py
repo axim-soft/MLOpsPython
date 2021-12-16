@@ -173,6 +173,7 @@ def main():
         description="Model training/retraining pipeline",
         version=e.build_id,
     )
+    print(register_step)
     print(f"Published pipeline: {published_pipeline.name}")
     print(f"for build {published_pipeline.version}")
 
