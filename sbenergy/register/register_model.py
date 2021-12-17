@@ -155,7 +155,7 @@ def main():
                 build_uri)
     else:
         print("Model not found. Skipping model registration.")
-        sys.exit(0)
+        
 
 
 def model_already_registered(model_name, exp, run_id):
