@@ -118,7 +118,10 @@ try:
         production_model_mse = 1000000
         if (metric_eval in model.tags):
             production_model_mse = float(model.tags[metric_eval])
-        new_model_mse = float(run.parent.get_metrics().get(metric_eval))
+        if run.parent.get_metrics().get(metric_eval) is not None:
+            new_model_mse = float(run.parent.get_metrics().get(metric_eval))
+        else:
+            new_model_mse = None
         if (production_model_mse is None or new_model_mse is None):
             print("Unable to find", metric_eval, "metrics, "
                   "exiting evaluation")
