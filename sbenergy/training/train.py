@@ -71,7 +71,7 @@ def model_initialize(data, horizon):
     return lstm_model
 
 def train_model(model, data, epochs):
-    model.fit(data["train"]["X"], data["train"]["y"],batch_size=10, epochs=epochs,validation_data=(data["test"]["X"],data["test"]["y"]),verbose=1,shuffle=False)
+    model.fit(data["train"]["X"], data["train"]["y"].reshape(1081,1),batch_size=10, epochs=epochs,validation_data=(data["test"]["X"],data["test"]["y"].reshape(1081,1)),verbose=1,shuffle=False)
     return model
 
 def get_model_metrics(model, data, val):
