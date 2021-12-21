@@ -22,7 +22,7 @@ variables:
   - name: EXPERIMENT_NAME
     value: mlopspython
   - name: DATASET_NAME
-    value: juno_3month_one_hour
+    value: cancer
   # Uncomment DATASTORE_NAME if you have configured non default datastore to point to your data
   - name: DATASTORE_NAME
     value: workspaceblobstore
@@ -31,7 +31,7 @@ variables:
   - name: TRAINING_PIPELINE_NAME
     value: "sbenergy-Training-Pipeline"
   - name: MODEL_NAME
-    value: sbenergy_forecast_model.pkl
+    value: cancer_model.pkl
 
   # AML Compute Cluster Config
   - name: AML_ENV_NAME
