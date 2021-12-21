@@ -139,11 +139,13 @@ try:
            if (new_model_mse < production_model_mse):
                print("New trained model performs better, "
                      "thus it should be registered")
+           else:
+               print("New trained model metric is worse than or equal to "
+                     "production model so skipping model registration.")
+               if((allow_run_cancel).lower() == 'true'):
+                   run.parent.cancel()
         else:
-            print("New trained model metric is worse than or equal to "
-                  "production model so skipping model registration.")
-            if((allow_run_cancel).lower() == 'true'):
-                run.parent.cancel()
+            print("New model did not perform well enough, so skipping model registration")
     else:
         print("This is the first model, "
               "thus it should be registered")
