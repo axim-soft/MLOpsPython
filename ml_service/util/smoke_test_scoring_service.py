@@ -5,6 +5,7 @@ from azureml.core import Workspace
 from azureml.core.webservice import AksWebservice, AciWebservice
 from ml_service.util.env_variables import Env
 import secrets
+import numpy
 
 input_sample = numpy.array([[[  0],
    [  0],
