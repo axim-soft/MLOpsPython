@@ -19,7 +19,7 @@ input_sample = [[[  0],
    [388]]]
 
 input = {"data": input_sample}
-output_len = 2
+output_len = len(input_sample)
 
 
 def call_web_service(e, service_type, service_name):
